@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 import {
   Card,
   CardContent,
@@ -59,11 +60,15 @@ const SignUp = () => {
       onSuccess: () => {
         navigate("/");
       },
-      onError: (error) => {
-        console.log(error);
+      onError: (error: unknown) => {
+        let message = "Something went wrong";
+
+        if (axios.isAxiosError(error)) {
+          message = error.response?.data?.message ?? message;
+        }
         toast({
           title: "Error",
-          description: error.response.data.message,
+          description: message,
           variant: "destructive",
         });
       },
