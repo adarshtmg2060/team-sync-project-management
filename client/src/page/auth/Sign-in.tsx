@@ -65,7 +65,7 @@ const SignIn = () => {
       onError: (error) => {
         toast({
           title: "Error",
-          description: error.message,
+          description: error.response.data.message,
           variant: "destructive",
         });
       },
@@ -135,12 +135,6 @@ const SignIn = () => {
                                 <FormLabel className="dark:text-[#f1f7feb5] text-sm">
                                   Password
                                 </FormLabel>
-                                <a
-                                  href="#"
-                                  className="ml-auto text-sm underline-offset-4 hover:underline"
-                                >
-                                  Forgot your password?
-                                </a>
                               </div>
                               <FormControl>
                                 <Input
